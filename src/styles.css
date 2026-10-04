@@ -82,7 +82,7 @@ h2.display { font-size: clamp(2.4rem, 6vw, 4.6rem); }
 .desktop-nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--green); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
 .desktop-nav a:hover::after { transform: scaleX(1); }
 .header-cta { padding: 10px 20px; box-shadow: 0 4px 0 var(--green-ink); }
-.menu-toggle { display: none; margin-left: auto; width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--navy); position: relative; z-index: 2; }
+.menu-toggle { display: none; margin-left: auto; width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--navy); position: relative; z-index: 100; }
 .menu-toggle .bar { position: absolute; left: 13px; right: 13px; height: 2px; background: var(--white); transition: transform .3s ease, top .3s ease; }
 .menu-toggle .bar:nth-child(2) { top: 19px; }
 .menu-toggle .bar:nth-child(3) { top: 26px; }
@@ -91,14 +91,15 @@ h2.display { font-size: clamp(2.4rem, 6vw, 4.6rem); }
 .is-open .menu-toggle .bar:nth-child(2) { top: 22px; transform: rotate(45deg); }
 .is-open .menu-toggle .bar:nth-child(3) { top: 22px; transform: rotate(-45deg); }
 
-.mobile-menu { position: fixed; inset: 0; background: var(--navy); color: var(--white); padding: calc(var(--header-h) + 24px + env(safe-area-inset-top, 0px)) var(--gutter) calc(32px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 28px; clip-path: circle(0% at calc(100% - 40px) 36px); transition: clip-path .6s cubic-bezier(.7, 0, .2, 1); visibility: hidden;
-  background-image: linear-gradient(var(--grid-dark) 1px, transparent 1px), linear-gradient(90deg, var(--grid-dark) 1px, transparent 1px); background-size: 36px 36px; overflow-y: auto; }
-.is-open .mobile-menu { clip-path: circle(150% at calc(100% - 40px) 36px); visibility: visible; }
+.mobile-menu { position: fixed; inset: 0; background: var(--navy); color: var(--white); padding: calc(var(--header-h) + 24px + env(safe-area-inset-top, 0px)) var(--gutter) calc(32px + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 28px; clip-path: circle(0% at calc(100% - 40px) 36px); transition: clip-path .6s cubic-bezier(.7, 0, .2, 1), visibility 0s linear .6s, opacity .6s; visibility: hidden; opacity: 0;
+  background-image: linear-gradient(var(--grid-dark) 1px, transparent 1px), linear-gradient(90deg, var(--grid-dark) 1px, transparent 1px); background-size: 36px 36px; overflow-y: auto; z-index: 90; }
+.is-open .mobile-menu { clip-path: circle(150% at calc(100% - 40px) 36px); visibility: visible; opacity: 1; transition: clip-path .6s cubic-bezier(.7, 0, .2, 1), visibility 0s linear 0s, opacity .6s; }
 .mobile-menu-logo { display: flex; justify-content: center; padding: 18px; border: 1px solid rgba(255, 255, 255, .12); border-radius: 18px; background: rgba(255, 255, 255, .03); }
 .mobile-menu-logo .logo { width: min(260px, 70vw); height: auto; }
 .mobile-menu nav { display: flex; flex-direction: column; }
-.mobile-menu nav a { font-family: var(--f-display); font-weight: 800; font-size: clamp(2rem, 9vw, 2.6rem); text-transform: uppercase; text-decoration: none; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, .1); display: flex; align-items: baseline; gap: 14px; opacity: 0; transform: translateY(16px); transition: opacity .4s ease, transform .4s ease; transition-delay: calc(.2s + var(--i) * .06s); }
-.is-open .mobile-menu nav a { opacity: 1; transform: none; }
+.mobile-menu nav a, .mobile-menu .btn-green { font-family: var(--f-display); font-weight: 800; font-size: clamp(2rem, 9vw, 2.6rem); text-transform: uppercase; text-decoration: none; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, .1); display: flex; align-items: baseline; gap: 14px; opacity: 0; transform: translateY(16px); transition: opacity .4s ease, transform .4s ease; transition-delay: calc(.2s + var(--i, 0) * .06s); }
+.mobile-menu .btn-green { font-family: var(--f-body); font-weight: 700; font-size: 1.1rem; border: none; justify-content: center; margin-top: 10px; padding: 14px; text-transform: none; }
+.is-open .mobile-menu nav a, .is-open .mobile-menu .btn-green { opacity: 1; transform: none; }
 .mm-no { font-family: var(--f-body); font-size: .8rem; color: var(--green); font-weight: 700; }
 .mm-hand { color: var(--green); font-size: 1.6rem; margin: 0; text-align: center; transform: rotate(-3deg); }
 

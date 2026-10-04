@@ -49,7 +49,7 @@ export default function Header() {
             </a>
           ))}
         </nav>
-        <a href="#contact" className="btn btn-green" onClick={go('contact')} tabIndex={open ? 0 : -1}>Start a project</a>
+        <a href="#contact" className="btn btn-green" onClick={go('contact')} tabIndex={open ? 0 : -1} style={{ '--i': nav.length }}>Start a project</a>
         <p className="hand mm-hand">less paper, more progress</p>
       </div>
     </header>
